@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PtychoBench dataset contains 391 expert-annotated ptychographic reconstructions from experiments conducted at the Advanced Photon Source (APS) at Argonne National Laboratory. Due to institutional policies and data sensitivity, the dataset is available upon request and subject to approval.
+The PtychoBench dataset contains 391 expert-annotated ptychographic reconstructions from experiments conducted at the Advanced Photon Source (APS) at Argonne National Laboratory. Due to institutional policies and data sensitivity, the dataset is available upon request and subject to institutional approval.
 
 ## Dataset Contents
 

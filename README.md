@@ -49,8 +49,6 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 ├── notebooks/
 │   ├── visualizations.ipynb      # Result plotting
 │
-├── requirements.txt              # Python dependencies
-├── setup.py                      # Package installation
 ├── LICENSE                       # MIT License
 └── README.md                     # This file
 ```

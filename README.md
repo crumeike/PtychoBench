@@ -14,6 +14,8 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 
 ### Key Findings
 - Task-dependent optimal specialization pathways
+- contextual interference phenomenon in fine-tuned models
+- Rigid "super expert" phenomenon observed in large 
 - VLM artifact detection: SFT + ICL complementary (Micro-F1: 0.728)
 - LLM parameter recommendation: ICL on large base model superior (Micro-F1: 0.847)
 - Context relevance is critical for both strategies

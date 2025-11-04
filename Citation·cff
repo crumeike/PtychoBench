@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: "If you use this software or dataset, please cite it as below."
+type: software
+title: "Adapting Foundation Models for X-ray Ptychography in Low-Data Regimes"
+authors:
+  - family-names: Umeike
+    given-names: Robinson
+    affiliation: "The University of Alabama"
+    email: crumeike@crimson.ua.edu
+  - family-names: Getty
+    given-names: Neil
+    affiliation: "Argonne National Laboratory"
+    email: ngetty@anl.gov
+  - family-names: Yin
+    given-names: Xiangyu
+    affiliation: "Argonne National Laboratory"
+    email: xyin@anl.gov
+  - family-names: Jiang
+    given-names: Yi
+    affiliation: "Argonne National Laboratory"
+    email: yjiang@anl.gov
+repository-code: "https://github.com/crumeike/ptychobench"
+url: "https://github.com/crumeike/ptychobench"
+keywords:
+  - vision-language-models
+  - large-language-models
+  - ptychography
+  - x-ray-imaging
+  - supervised-fine-tuning
+  - in-context-learning
+  - scientific-ai
+  - materials-science
+  - domain-adaptation
+version: 1.0.0
+date-released: "2025-11-03"
+preferred-citation:
+  type: workshop-paper
+  title: "Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes"
+  authors:
+    - family-names: Umeike
+      given-names: Robinson
+    - family-names: Getty
+      given-names: Neil
+    - family-names: Yin
+      given-names: Xiangyu
+    - family-names: Jiang
+      given-names: Yi
+  collection-title: "NeurIPS 2025 Workshop on AI4MAT"
+  year: 2025
+  conference:
+    name: "Neural Information Processing Systems (NeurIPS)"

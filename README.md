@@ -144,13 +144,14 @@ LoRA adapters for all fine-tuned models are available in the `checkpoints/` dire
 ### Main Results (Tables 1 & 2)
 
 ```bash
-# Run all VLM experiments (ICL utilizes random image selection both for SSFS and RFS, so results may vary slightly)
+# Run all VLM experiments 
 bash scripts/run_all_vlm_experiments.sh
 
 # Run all LLM experiments
 bash scripts/run_all_llm_experiments.sh
 
 ```
+- Note that results may vary slightly (particularly for VLM experiments), as ICL utilizes a random image selection process for both SSFS and RFS.
 
 ### Statistical Validation
 

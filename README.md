@@ -189,9 +189,9 @@ This work was supported by:
 ## 📧 Contact
 
 For questions about the code:
+- **Robinson Umeike**: crumeike@crimson.ua.edu
 - **Neil Getty**: ngetty@anl.gov
 - **Yin Xiangyu** xyin@anl.gov
-- **Robinson Umeike**: crumeike@crimson.ua.edu
 
 For dataset access requests, contact: yjiang@anl.gov, xyin@anl.gov
 

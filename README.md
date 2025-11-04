@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![arXiv](https://img.shields.io/badge/arXiv-2025.XXXXX-b31b1b.svg)](https://arxiv.org/abs/)
 
-The implementation of "Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes" - NeurIPS 2025 AI4MAT Workshop.
+This repository contains an implementation of "Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes" accepted at the NeurIPS 2025 AI4MAT Workshop.
 
 ## 📋 Overview
 

@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![arXiv](https://img.shields.io/badge/arXiv-2025.XXXXX-b31b1b.svg)](https://arxiv.org/abs/)
 
-Official implementation of "Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes" - NeurIPS 2025 AI4MAT Workshop.
+The implementation of "Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes" - NeurIPS 2025 AI4MAT Workshop.
 
 ## 📋 Overview
 
@@ -62,15 +62,6 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 git clone https://github.com/crumeike/ptychobench.git
 cd ptychobench
 
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install the package
-pip install -e .
 ```
 
 ### Dataset Access
@@ -197,14 +188,11 @@ This work was supported by:
 ## 📧 Contact
 
 For questions about the code:
-- **Robinson Umeike**: crumeike@crimson.ua.edu
 - **Neil Getty**: ngetty@anl.gov
+- **Yin Xiangyu** xyin@anl.gov
+- **Robinson Umeike**: crumeike@crimson.ua.edu
 
 For dataset access requests, contact: yjiang@anl.gov, xyin@anl.gov
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🔗 Related Work
 

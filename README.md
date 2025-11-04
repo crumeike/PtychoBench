@@ -172,15 +172,17 @@ python evaluation/bootstrapping/generate_tables.py --output_dir ./results
 If you use this code or the PtychoBench dataset, please cite:
 
 ```bibtex
-@inproceedings{umeike2025ptychobench,
-  title={Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes},
-  author={Umeike, Robinson and Getty, Neil and Yin, Xiangyu and Jiang, Yi},
-  booktitle={NeurIPS 2025 Workshop on AI4MAT},
-  year={2025}
+@inproceedings{
+umeike2025adapting,
+title={Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes},
+author={Robinson Umeike and Neil Getty and Xiangyu Yin and Yi Jiang},
+booktitle={AI for Accelerated Materials Design - NeurIPS 2025},
+year={2025},
+url={https://openreview.net/forum?id=zgLfoV5jjX}
 }
 ```
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 This work was supported by:
 - Laboratory Directed Research and Development (LDRD) Program at Argonne National Laboratory (Project 2025-0495)

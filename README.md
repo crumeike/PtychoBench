@@ -191,7 +191,6 @@ This work was supported by:
 For questions about the code:
 - **Robinson Umeike**: crumeike@crimson.ua.edu
 - **Neil Getty**: ngetty@anl.gov
-- **Yin Xiangyu** xyin@anl.gov
 
 For dataset access requests, contact: yjiang@anl.gov, xyin@anl.gov
 

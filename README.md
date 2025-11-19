@@ -23,18 +23,13 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 ## 🏗️ Repository Structure
 
 ```
-.
-├── data/
-│   ├── ptychobench/              # PtychoBench dataset (available upon request but subject to institutional approval)
-│   │   ├── images/               # Ptychographic reconstruction images
-│   │   ├── annotations/          # Expert annotations
-│
+
 ├── models/
 │   ├── vlm/                      # Vision-Language Model implementations
 │   │   ├── inference.py          # VLM inference pipeline
 │   ├── llm/                      # Language Model implementations
 │   │   ├── inference.py          # LLM inference pipeline
-│   └── baselines/                # Baseline implementations (DINOv3, GPT-4o)
+│   └── baselines/                # Baseline implementations (GPT-4o)
 │
 ├── evaluation/
 │   ├── bootstrapping             # Statistical validation
@@ -49,6 +44,7 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 ├── notebooks/
 │   ├── visualizations.ipynb      # Result plotting
 │
+├── Data Access.md                # Data Access statement
 ├── LICENSE                       # MIT License
 └── README.md                     # This file
 ```

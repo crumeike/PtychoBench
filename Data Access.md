@@ -48,18 +48,6 @@ All publications, presentations, or software using PtychoBench must cite:
 }
 ```
 
-## Alternative: Synthetic Data
-
-If you want to test the codebase before receiving the full dataset, we provide:
-- **Sample images** (10 examples in `data/samples/`)
-- **Synthetic annotations** for testing code
-- **Data format specifications** for compatibility
-
-Download sample data:
-```bash
-python scripts/download_samples.py
-```
-
 ## Technical Support
 
 ### Dataset Issues

@@ -57,7 +57,6 @@ For questions about the dataset content, format, or annotations:
 
 ### Code/Model Issues
 For questions about the codebase, models, or reproduction:
-- **GitHub Issues**: https://github.com/[username]/ptychobench/issues
 - **Email**: crumeike@crimson.ua.edu, ngetty@anl.gov, xyin@anl.gov
 
 ## Updates and Versioning

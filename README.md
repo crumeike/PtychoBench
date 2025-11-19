@@ -61,14 +61,9 @@ cd ptychobench
 
 ### Dataset Access
 
-The PtychoBench dataset is available upon request but subject to institutional approval. 
-
 **To request access:**
-- Email: yjiang@anl.gov
-- Include: Your name, institution, and intended use case
-- Data will be provided under a data use agreement
-
-Once approved, place the dataset in the `data/ptychobench/` directory.
+- Email: yjiang@anl.gov with access request. 
+- See the Data Access.md for full details
 
 ### Running Experiments
 

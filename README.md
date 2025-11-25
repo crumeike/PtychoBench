@@ -67,7 +67,7 @@ python fewshot_eval_unsloth.py
     --model_path unsloth/Llama-3.2-90B-Vision-Instruct
     --train_file ./ptycho_data_splits_20250814_101410/train.json
     --test_file ./ptycho_data_splits_20250814_101410/test.json
-    --image_base_path /home/cumeike/ptycho-vlm-data/data/images
+    --image_base_path ./data/images
     --k_values 0 1 3 5 7
     --selection_mode random
     --num_test 79
@@ -100,7 +100,7 @@ python fewshot_eval_unsloth.py
     --model_path unsloth/Llama-3.2-11B-Vision-Instruct
     --train_file ./ptycho_data_splits_20250814_101410/train.json
     --test_file ./ptycho_data_splits_20250814_101410/test.json
-    --image_base_path /home/cumeike/ptycho-vlm-data/data/images
+    --image_base_path ./data/images
     --k_values 0 1 3 5 7
     --selection_mode random
     --num_test 79

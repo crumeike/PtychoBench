@@ -59,12 +59,6 @@ cd ptychobench
 
 ```
 
-### Dataset Access
-
-**To request access:**
-- Email: yjiang@anl.gov with access request. 
-- See the Data Access.md for full details
-
 ### Running Experiments
 
 #### 1. VLM Artifact Detection
@@ -157,6 +151,12 @@ python evaluation/bootstrapping/generate_tables.py --output_dir ./results
 
 ```
 
+### Dataset Access
+
+**To request access:**
+- Email: yjiang@anl.gov with access request. 
+- See the Data Access.md for full details
+  
 ## 📖 Citation
 
 If you use this code or the PtychoBench dataset, please cite:

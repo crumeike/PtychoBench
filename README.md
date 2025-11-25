@@ -1,9 +1,8 @@
-# Adapting Foundation Models for X-ray Ptychography in Low-Data Regimes
+# PtychoBench: Adapting Foundation Models for X-ray Ptychography
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![arXiv](https://img.shields.io/badge/arXiv-2511.02503-b31b1b.svg)](https://arxiv.org/abs/2511.02503)
-
 
 ## 📋 Overview
 
@@ -15,32 +14,32 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 - Task-dependent optimal specialization pathways
 - Contextual interference phenomenon in fine-tuned models under RFS strategy
 - Rigid 'super expert' tendencies observed in large parameter models on the textual task
-- VLM artifact detection: SFT + ICL complementary (Micro-F1: 0.728)
-- LLM parameter recommendation: ICL on large base model superior (Micro-F1: 0.847)
+- **VLM artifact detection**: SFT + ICL complementary (Micro-F1: 0.728)
+- **LLM parameter recommendation**: ICL on large base model superior (Micro-F1: 0.847)
 - Context relevance is critical for both strategies
 
 ## 🏗️ Repository Structure
 
 ```
-
 ├── inference/
-│   ├── vlm/                      # Vision-Language Model implementations
-│   │   ├── inference.py          # VLM inference pipeline
-│   ├── llm/                      # Language Model implementations
-│   │   ├── inference.py          # LLM inference pipeline
-│   └── baselines/                # Baseline implementations (GPT-4o)
+│   ├── vlm_inference.py          # VLM artifact detection
+│   ├── llm_inference.py          # LLM parameter recommendation
+│   └── baseline_gpt4o.py         # OpenAI GPT-4o baseline (both tasks)
 │
 ├── evaluation/
-│   ├── bootstrapping             # Statistical validation
+│   ├── bootstrap.py              # Bootstrap analysis for single file
+│   ├── batch_bootstrap.py        # Batch bootstrap analysis
+│   └── ptychobench_loader.py     # Data loader utilities
 │
-│
-├── checkpoints/                  # Pre-trained model checkpoints (LoRA adapters)
+├── checkpoints/                  # Download from HuggingFace
 │   ├── vlm_11b_sft/
 │   ├── vlm_90b_sft/
 │   ├── llm_8b_sft/
 │   └── llm_70b_sft/
 │
-├── Data Access.md                # Data Access statement
+├── Data Access.md                # Dataset access instructions
+├── requirements.txt              # Python dependencies
+├── CITATION.cff                  # Citation metadata
 ├── LICENSE                       # MIT License
 └── README.md                     # This file
 ```
@@ -54,106 +53,278 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 git clone https://github.com/crumeike/ptychobench.git
 cd ptychobench
 
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-### Running Experiments
+### Download Checkpoints
 
-#### 1. VLM Artifact Detection
+Our fine-tuned LoRA adapters are hosted on HuggingFace:
 
 ```bash
-
-# Evaluate with ICL (SSFS)
-python fewshot_eval_unsloth.py
-    --model_path unsloth/Llama-3.2-90B-Vision-Instruct
-    --train_file ./ptycho_data_splits_20250814_101410/train.json
-    --test_file ./ptycho_data_splits_20250814_101410/test.json
-    --image_base_path ./data/images
-    --k_values 0 1 3 5 7
-    --selection_mode random
-    --num_test 79
-    --seed 12345
-
-
-# Evaluate with ICL (RFS)
-python experiments/run_vlm_experiments.py \
-    --model_name meta-llama/Llama-3.2-11B-vision \
-    --task artifact_detection \
-    --train_mode icl \
-    --context_strategy ssfs \
-    --num_shots 0 1 3 5 7 \
-    --checkpoint_path ./checkpoints/vlm_11b_sft
-
+# Download all checkpoints
+huggingface-cli download crumeike/ptychobench-checkpoints --local-dir ./checkpoints
 ```
 
-#### 2. LLM Parameter Recommendation
-
-```bash
-# Fine-tune Llama 3.1 70B
-python experiments/run_llm_experiments.py \
-    --model_name meta-llama/Meta-Llama-3.1-70B-Instruct \
-    --task parameter_recommendation \
-    --train_mode sft \
-    --output_dir ./checkpoints/llm_70b_sft
-
-# Evaluate with ICL (SSFS)
-python fewshot_eval_unsloth.py
-    --model_path unsloth/Llama-3.2-11B-Vision-Instruct
-    --train_file ./ptycho_data_splits_20250814_101410/train.json
-    --test_file ./ptycho_data_splits_20250814_101410/test.json
-    --image_base_path ./data/images
-    --k_values 0 1 3 5 7
-    --selection_mode random
-    --num_test 79
-    --seed 1234
-
-```
-
-## 🎯 Pre-trained Models
-
-LoRA adapters for all fine-tuned models are available in the `checkpoints/` directory:
-
-| Model | Task | Parameters | Link |
-|-------|------|-----------|------|
-| Llama 3.2-Vision 11B | Artifact Detection | 11B + LoRA (r=16) | [Download](checkpoints/vlm_11b_sft) |
-| Llama 3.2-Vision 90B | Artifact Detection | 90B + LoRA (r=16) | [Download](checkpoints/vlm_90b_sft) |
-| Llama 3.1 8B | Parameter Rec. | 8B + LoRA (r=16) | [Download](checkpoints/llm_8b_sft) |
-| Llama 3.1 70B | Parameter Rec. | 70B + LoRA (r=16) | [Download](checkpoints/llm_70b_sft) |
-
-
-## 📈 Reproducing Results
-
-### Main Results (Tables 1 & 2)
-
-```bash
-# Run all VLM experiments 
-bash scripts/run_all_vlm_experiments.sh
-
-# Run all LLM experiments
-bash scripts/run_all_llm_experiments.sh
-
-```
-- Note that results may vary slightly (particularly for VLM experiments), as ICL utilizes a random image selection process for both SSFS and RFS.
-
-### Statistical Validation
-
-```bash
-# Bootstrap confidence intervals (n=10,000)
-python evaluation/bootstrap.py \
-    --results_file ./results/vlm_results.json \
-    --n_bootstrap 10000 \
-    --output_file ./results/vlm_confidence_intervals.csv
-
-# Generate results tables with confidence intervals
-python evaluation/bootstrapping/generate_tables.py --output_dir ./results
-
-```
+Or download individual models:
+- [Llama 3.2-Vision 11B](https://huggingface.co/crumeike/ptychobench-checkpoints/tree/main/vlm_11b_sft)
+- [Llama 3.2-Vision 90B](https://huggingface.co/crumeike/ptychobench-checkpoints/tree/main/vlm_90b_sft)
+- [Llama 3.1 8B](https://huggingface.co/crumeike/ptychobench-checkpoints/tree/main/llm_8b_sft)
+- [Llama 3.1 70B](https://huggingface.co/crumeike/ptychobench-checkpoints/tree/main/llm_70b_sft)
 
 ### Dataset Access
 
-**To request access:**
-- Email: yjiang@anl.gov with access request. 
-- See 'Data Access.md' for full details
-  
+**To request access to the PtychoBench dataset:**
+- Email: yjiang@anl.gov
+- See [`Data Access.md`](Data%20Access.md) for full details
+
+## 📊 Running Experiments
+
+### 1. VLM Artifact Detection
+
+#### Fine-tuned Model (SFT + ICL)
+```bash
+python inference/vlm_inference.py \
+    --model_path ./checkpoints/vlm_90b_sft \
+    --train_file ./data/train.json \
+    --test_file ./data/test.json \
+    --image_base_path ./data/images \
+    --k_values 0 1 3 5 7 \
+    --selection_mode similar \
+    --seed 42 \
+    --output_dir ./results
+```
+
+#### Base Model (ICL only)
+```bash
+python inference/vlm_inference.py \
+    --model_path unsloth/Llama-3.2-90B-Vision-Instruct \
+    --train_file ./data/train.json \
+    --test_file ./data/test.json \
+    --image_base_path ./data/images \
+    --k_values 0 1 3 5 7 \
+    --selection_mode similar \
+    --seed 42 \
+    --output_dir ./results
+```
+
+#### Baseline (GPT-4o)
+```bash
+# Set your OpenAI API key
+export OPENAI_API_KEY='your-api-key-here'
+
+python inference/baseline_gpt4o.py \
+    --task artifact_detection \
+    --openai_model gpt-4o \
+    --train_file ./data/train.json \
+    --test_file ./data/test.json \
+    --image_base_path ./data/images \
+    --k_values 0 1 3 5 7 \
+    --selection_mode similar \
+    --seed 42 \
+    --output_dir ./results
+```
+
+### 2. LLM Parameter Recommendation
+
+#### Fine-tuned Model (SFT + ICL)
+```bash
+python inference/llm_inference.py \
+    --model_path ./checkpoints/llm_70b_sft \
+    --train_file ./data/train.json \
+    --test_file ./data/test.json \
+    --k_values 0 1 3 5 7 \
+    --selection_mode similar \
+    --seed 42 \
+    --output_dir ./results
+```
+
+#### Base Model (ICL only)
+```bash
+python inference/llm_inference.py \
+    --model_path unsloth/Meta-Llama-3.1-70B-Instruct \
+    --train_file ./data/train.json \
+    --test_file ./data/test.json \
+    --k_values 0 1 3 5 7 \
+    --selection_mode similar \
+    --seed 42 \
+    --output_dir ./results
+```
+
+#### Baseline (GPT-4o)
+```bash
+python inference/baseline_gpt4o.py \
+    --task parameter_recommendation \
+    --openai_model gpt-4o \
+    --train_file ./data/train.json \
+    --test_file ./data/test.json \
+    --k_values 0 1 3 5 7 \
+    --selection_mode similar \
+    --seed 42 \
+    --output_dir ./results
+```
+
+## 🎯 Command-Line Arguments
+
+### Common Arguments (All Scripts)
+- `--train_file`: Path to training data JSON
+- `--test_file`: Path to test data JSON
+- `--k_values`: K-shot values to evaluate (default: 0 1 3 5 7)
+- `--selection_mode`: Example selection strategy - `random` or `similar` (default: similar)
+- `--num_test`: Number of test samples to evaluate (default: all)
+- `--seed`: Random seed for reproducibility (default: 42)
+- `--output_dir`: Output directory for results (default: ./results)
+
+### VLM-Specific
+- `--model_path`: Path to fine-tuned VLM checkpoint
+- `--image_base_path`: Directory containing ptychography images (required)
+
+### LLM-Specific
+- `--model_path`: Path to fine-tuned LLM checkpoint
+
+### Baseline-Specific
+- `--task`: Task type - `artifact_detection` or `parameter_recommendation`
+- `--openai_model`: OpenAI model name (default: gpt-4o)
+- `--image_base_path`: Required for artifact_detection task
+
+## 📈 Output Files
+
+Each evaluation produces:
+- **JSON file**: Complete results with predictions and metrics
+- **CSV file**: Summary table with per-sample-type breakdown
+
+Example output structure:
+```
+results/
+├── vlm_artifact_det_vlm_90b_sft_20250115_143022.json
+├── vlm_artifact_det_vlm_90b_sft_20250115_143022_summary.csv
+├── llm_param_rec_llm_70b_sft_20250115_150133.json
+└── llm_param_rec_llm_70b_sft_20250115_150133_summary.csv
+```
+
+## 📈 Reproducing Paper Results
+
+### Main Results (Tables 1 & 2)
+
+Our paper reports results for:
+1. **Fine-tuned models (SFT)** with k-shot ICL
+2. **Base models** with k-shot ICL only
+3. **GPT-4o baseline**
+
+#### VLM Experiments (Artifact Detection)
+
+```bash
+# Fine-tuned 11B - Random selection
+python inference/vlm_inference.py --model_path ./checkpoints/vlm_11b_sft \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --image_base_path ./data/images --selection_mode random --output_dir ./results
+
+# Fine-tuned 11B - Similar selection
+python inference/vlm_inference.py --model_path ./checkpoints/vlm_11b_sft \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --image_base_path ./data/images --selection_mode similar --output_dir ./results
+
+# Fine-tuned 90B - Random selection
+python inference/vlm_inference.py --model_path ./checkpoints/vlm_90b_sft \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --image_base_path ./data/images --selection_mode random --output_dir ./results
+
+# Fine-tuned 90B - Similar selection
+python inference/vlm_inference.py --model_path ./checkpoints/vlm_90b_sft \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --image_base_path ./data/images --selection_mode similar --output_dir ./results
+
+# Base 11B - Similar selection (ICL only)
+python inference/vlm_inference.py --model_path unsloth/Llama-3.2-11B-Vision-Instruct \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --image_base_path ./data/images --selection_mode similar --output_dir ./results
+
+# Base 90B - Similar selection (ICL only)
+python inference/vlm_inference.py --model_path unsloth/Llama-3.2-90B-Vision-Instruct \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --image_base_path ./data/images --selection_mode similar --output_dir ./results
+```
+
+#### LLM Experiments (Parameter Recommendation)
+
+```bash
+# Fine-tuned 8B - Random selection
+python inference/llm_inference.py --model_path ./checkpoints/llm_8b_sft \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --selection_mode random --output_dir ./results
+
+# Fine-tuned 8B - Similar selection
+python inference/llm_inference.py --model_path ./checkpoints/llm_8b_sft \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --selection_mode similar --output_dir ./results
+
+# Fine-tuned 70B - Random selection
+python inference/llm_inference.py --model_path ./checkpoints/llm_70b_sft \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --selection_mode random --output_dir ./results
+
+# Fine-tuned 70B - Similar selection
+python inference/llm_inference.py --model_path ./checkpoints/llm_70b_sft \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --selection_mode similar --output_dir ./results
+
+# Base 8B - Similar selection (ICL only)
+python inference/llm_inference.py --model_path unsloth/Meta-Llama-3.1-8B-Instruct \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --selection_mode similar --output_dir ./results
+
+# Base 70B - Similar selection (ICL only)
+python inference/llm_inference.py --model_path unsloth/Meta-Llama-3.1-70B-Instruct \
+    --train_file ./data/train.json --test_file ./data/test.json \
+    --selection_mode similar --output_dir ./results
+```
+
+**Note**: Results may vary slightly for VLM experiments due to random image selection in ICL.
+
+### Statistical Validation
+
+Bootstrap confidence intervals and significance testing:
+
+```bash
+# Analyze a single result file
+python evaluation/bootstrap.py \
+    --results_file ./results/vlm_artifact_det_vlm_90b_sft_20250115_143022.json \
+    --n_bootstrap 10000 \
+    --output_file ./results/bootstrap_results.csv
+
+# Batch analysis of all results in a directory
+python evaluation/batch_bootstrap.py \
+    --results_dir ./results \
+    --output_dir ./bootstrap_output \
+    --n_bootstrap 10000
+```
+
+The bootstrap analysis generates:
+- CSV files with mean, std, and 95% confidence intervals
+- LaTeX tables ready for publication
+- Summary statistics
+
+## 🔬 Model Architecture
+
+### Fine-tuned Models (SFT with LoRA)
+
+Our fine-tuned checkpoints are LoRA adapters applied to Unsloth-optimized base models:
+
+| Checkpoint | Task | Base Model | Parameters | LoRA Rank | Download |
+|------------|------|------------|-----------|-----------|----------|
+| `vlm_11b_sft` | Artifact Detection | [unsloth/Llama-3.2-11B-Vision-Instruct](https://huggingface.co/unsloth/Llama-3.2-11B-Vision-Instruct) | 11B | r=16 | [HF Link](https://huggingface.co/crumeike/ptychobench-checkpoints/tree/main/vlm_11b_sft) |
+| `vlm_90b_sft` | Artifact Detection | [unsloth/Llama-3.2-90B-Vision-Instruct](https://huggingface.co/unsloth/Llama-3.2-90B-Vision-Instruct) | 90B | r=16 | [HF Link](https://huggingface.co/crumeike/ptychobench-checkpoints/tree/main/vlm_90b_sft) |
+| `llm_8b_sft` | Parameter Rec. | [unsloth/Meta-Llama-3.1-8B-Instruct](https://huggingface.co/unsloth/Meta-Llama-3.1-8B-Instruct) | 8B | r=16 | [HF Link](https://huggingface.co/crumeike/ptychobench-checkpoints/tree/main/llm_8b_sft) |
+| `llm_70b_sft` | Parameter Rec. | [unsloth/Meta-Llama-3.1-70B-Instruct](https://huggingface.co/unsloth/Meta-Llama-3.1-70B-Instruct) | 70B | r=16 | [HF Link](https://huggingface.co/crumeike/ptychobench-checkpoints/tree/main/llm_70b_sft) |
+
+**Note**: Our checkpoints contain only the LoRA adapter weights. The base models are automatically loaded from Unsloth's HuggingFace repository when running inference.
+
+### Base Models for ICL
+
+For In-Context Learning (ICL) experiments without fine-tuning, use the base models directly:
+- **VLM**: `unsloth/Llama-3.2-11B-Vision-Instruct` or `unsloth/Llama-3.2-90B-Vision-Instruct`
+- **LLM**: `unsloth/Meta-Llama-3.1-8B-Instruct` or `unsloth/Meta-Llama-3.1-70B-Instruct`
+
 ## 📖 Citation
 
 If you use this code or the PtychoBench dataset, please cite:
@@ -163,13 +334,13 @@ If you use this code or the PtychoBench dataset, please cite:
 umeike2025adapting,
 title={Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes},
 author={Robinson Umeike and Neil Getty and Xiangyu Yin and Yi Jiang},
-booktitle={AI for Accelerated Materials Design - NeurIPS 2025},
+booktitle={AI for Accelerated Materials Design - NeurIPS 2025 Workshop},
 year={2025},
 url={https://openreview.net/forum?id=zgLfoV5jjX}
 }
 ```
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 This work was supported by:
 - Laboratory Directed Research and Development (LDRD) Program at Argonne National Laboratory (Project 2025-0495)
@@ -181,8 +352,14 @@ For questions about the code:
 - **Robinson Umeike**: crumeike@crimson.ua.edu
 - **Neil Getty**: ngetty@anl.gov
 
-For dataset access requests, contact: yjiang@anl.gov, xyin@anl.gov
+For dataset access requests:
+- **Yi Jiang**: yjiang@anl.gov
+- **Xiangyu Yin**: xyin@anl.gov
 
 ## 🔗 Related Work
 
 - **PEAR Framework**: [arXiv:2410.09034](https://arxiv.org/abs/2410.09034)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -40,9 +40,6 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 │   ├── llm_8b_sft/
 │   └── llm_70b_sft/
 │
-├── notebooks/
-│   ├── visualizations.ipynb      # Result plotting
-│
 ├── Data Access.md                # Data Access statement
 ├── LICENSE                       # MIT License
 └── README.md                     # This file

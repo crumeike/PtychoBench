@@ -202,86 +202,8 @@ results/
 └── llm_param_rec_llm_70b_sft_20250115_150133_summary.csv
 ```
 
-## 📈 Reproducing Paper Results
 
-### Main Results (Tables 1 & 2)
-
-Our paper reports results for:
-1. **Fine-tuned models (SFT)** with k-shot ICL
-2. **Base models** with k-shot ICL only
-3. **GPT-4o baseline**
-
-#### VLM Experiments (Artifact Detection)
-
-```bash
-# Fine-tuned 11B - Random selection
-python inference/vlm_inference.py --model_path ./checkpoints/vlm_11b_sft \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --image_base_path ./data/images --selection_mode random --output_dir ./results
-
-# Fine-tuned 11B - Similar selection
-python inference/vlm_inference.py --model_path ./checkpoints/vlm_11b_sft \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --image_base_path ./data/images --selection_mode similar --output_dir ./results
-
-# Fine-tuned 90B - Random selection
-python inference/vlm_inference.py --model_path ./checkpoints/vlm_90b_sft \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --image_base_path ./data/images --selection_mode random --output_dir ./results
-
-# Fine-tuned 90B - Similar selection
-python inference/vlm_inference.py --model_path ./checkpoints/vlm_90b_sft \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --image_base_path ./data/images --selection_mode similar --output_dir ./results
-
-# Base 11B - Similar selection (ICL only)
-python inference/vlm_inference.py --model_path unsloth/Llama-3.2-11B-Vision-Instruct \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --image_base_path ./data/images --selection_mode similar --output_dir ./results
-
-# Base 90B - Similar selection (ICL only)
-python inference/vlm_inference.py --model_path unsloth/Llama-3.2-90B-Vision-Instruct \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --image_base_path ./data/images --selection_mode similar --output_dir ./results
-```
-
-#### LLM Experiments (Parameter Recommendation)
-
-```bash
-# Fine-tuned 8B - Random selection
-python inference/llm_inference.py --model_path ./checkpoints/llm_8b_sft \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --selection_mode random --output_dir ./results
-
-# Fine-tuned 8B - Similar selection
-python inference/llm_inference.py --model_path ./checkpoints/llm_8b_sft \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --selection_mode similar --output_dir ./results
-
-# Fine-tuned 70B - Random selection
-python inference/llm_inference.py --model_path ./checkpoints/llm_70b_sft \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --selection_mode random --output_dir ./results
-
-# Fine-tuned 70B - Similar selection
-python inference/llm_inference.py --model_path ./checkpoints/llm_70b_sft \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --selection_mode similar --output_dir ./results
-
-# Base 8B - Similar selection (ICL only)
-python inference/llm_inference.py --model_path unsloth/Meta-Llama-3.1-8B-Instruct \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --selection_mode similar --output_dir ./results
-
-# Base 70B - Similar selection (ICL only)
-python inference/llm_inference.py --model_path unsloth/Meta-Llama-3.1-70B-Instruct \
-    --train_file ./data/train.json --test_file ./data/test.json \
-    --selection_mode similar --output_dir ./results
-```
-
-**Note**: Results may vary slightly for VLM experiments due to random image selection in ICL.
-
-### Statistical Validation
+## Statistical Validation
 
 Bootstrap confidence intervals and significance testing:
 

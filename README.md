@@ -155,7 +155,7 @@ python evaluation/bootstrapping/generate_tables.py --output_dir ./results
 
 **To request access:**
 - Email: yjiang@anl.gov with access request. 
-- See the Data Access.md for full details
+- See 'Data Access.md' for full details
   
 ## 📖 Citation
 

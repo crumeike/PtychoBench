@@ -23,7 +23,7 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 
 ```
 
-├── models/
+├── inference/
 │   ├── vlm/                      # Vision-Language Model implementations
 │   │   ├── inference.py          # VLM inference pipeline
 │   ├── llm/                      # Language Model implementations

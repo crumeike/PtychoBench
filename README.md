@@ -264,6 +264,7 @@ python training/train_llm.py \
 - LLM 70B: 4-8 A100 GPUs (80GB)
 - LLM 8B: 2 A100 GPUs (40GB)
 
+-- See [`Training_Summary.md`](Training%20Summary.md) for more details
 ### Statistical Validation
 
 Bootstrap confidence intervals and significance testing:

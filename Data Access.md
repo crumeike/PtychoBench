@@ -57,7 +57,7 @@ For questions about the dataset content, format, or annotations:
 - **Include**: Dataset version, specific samples in question, description of issue
 
 ### Code/Model Issues
-For questions about the codebase, models, or reproduction:
+For questions about the codebase or models:
 - **Email**: crumeike@crimson.ua.edu, ngetty@anl.gov, xyin@anl.gov
 
 ## Updates and Versioning

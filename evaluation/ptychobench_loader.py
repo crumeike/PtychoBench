@@ -75,7 +75,8 @@ class PtychoBenchDataLoader:
         Returns:
             (model_name, is_sft)
         """
-        is_sft = model_path.startswith("/lus/eagle/projects/")
+        # Check if it's a fine-tuned model (local path) or base model (unsloth/huggingface path)
+        is_sft = not model_path.startswith("unsloth/") and not model_path.startswith("meta-llama/")
         
         # Extract model name from path
         if "Llama-3.2-11B-Vision" in model_path:

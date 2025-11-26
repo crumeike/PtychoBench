@@ -70,11 +70,6 @@ The dataset may be updated with:
 
 **Current Version**: 1.0.0 (Released: December 2025)
 
-Check for updates:
-```bash
-python scripts/check_dataset_version.py
-```
-
 ## Acknowledgments
 
 When using this dataset, please acknowledge:
@@ -91,5 +86,5 @@ When using this dataset, please acknowledge:
 
 ---
 
-*Last Updated: November 2025*
+*Last Updated: December 2025*
 *Dataset Version: 1.0.0*

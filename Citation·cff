@@ -32,9 +32,11 @@ keywords:
   - materials-science
   - domain-adaptation
 version: 1.0.0
-date-released: "2025-11-03"
+date-released: "2025-01-15"
+license: MIT
 preferred-citation:
-  type: workshop-paper
+  type: conference-paper
+  collection-title: "AI for Accelerated Materials Design - NeurIPS 2025 Workshop"
   title: "Adapting general-purpose foundation models for X-ray Ptychography in Low-Data Regimes"
   authors:
     - family-names: Umeike
@@ -45,7 +47,6 @@ preferred-citation:
       given-names: Xiangyu
     - family-names: Jiang
       given-names: Yi
-  collection-title: "NeurIPS 2025 Workshop on AI4MAT"
+  collection-title: "AI for Accelerated Materials Design - NeurIPS 2025 Workshop"
   year: 2025
-  conference:
-    name: "Neural Information Processing Systems (NeurIPS)"
+  url: "https://openreview.net/forum?id=zgLfoV5jjX"

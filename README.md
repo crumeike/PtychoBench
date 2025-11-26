@@ -284,7 +284,6 @@ python evaluation/batch_bootstrap.py \
 
 The bootstrap analysis generates:
 - CSV files with mean, std, and 95% confidence intervals
-- LaTeX tables ready for publication
 - Summary statistics
 
 ## 🔬 Model Architecture

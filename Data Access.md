@@ -27,11 +27,11 @@ ptychobench_dataset/
 │   ├── af707e7b-object_ph_Niter400.png
 │   └── ...
 └── annotations/
-    ├── artifact_detection_split.json
+    ├── artifact_detection_split
     │   ├── metadata.json
     │   ├── train.json
     │   └── test.json
-    └── parameter_recommendation_split.json
+    └── parameter_recommendation_split
         ├── metadata.json
         ├── train.json
         └── test.json

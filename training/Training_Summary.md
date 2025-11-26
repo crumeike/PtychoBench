@@ -1,7 +1,5 @@
 ## Training Configuration
 
-### Recommended Settings
-
 **VLM (Artifact Detection):**
 ```bash
 --num_epochs 50
@@ -36,7 +34,6 @@ Your data splits should follow this structure:
 data/
 ├── splits/
 │   ├── train.json
-│   ├── val.json
 │   └── test.json
 └── images/
     ├── image_001.png
@@ -119,24 +116,6 @@ python inference/vlm_inference.py \
     --output_dir ./results
 ```
 
-## Integration with Repository
-
-**File Organization:**
-```
-ptychobench/
-├── training/
-│   ├── train_vlm.py
-│   ├── train_llm.py
-│   └── data_loader.py
-├── inference/
-│   ├── vlm_inference.py
-│   ├── llm_inference.py
-│   └── baseline_gpt4o.py
-└── evaluation/
-    ├── bootstrap.py
-    ├── batch_bootstrap.py
-    └── ptychobench_loader.py
-```
 
 ## Notes
 

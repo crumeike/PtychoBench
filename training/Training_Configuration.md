@@ -1,5 +1,3 @@
-# Training Scripts Summary
-
 ## Training Configuration
 
 ### Recommended Settings

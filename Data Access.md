@@ -26,18 +26,19 @@ ptychobench_dataset/
 ├── images/
 │   ├── af707e7b-object_ph_Niter400.png
 │   └── ...
-├── annotations/
-│   ├── artifact_detection_split.json
-│       ├── train.json
-|       └── test.json
-│   └── parameter_recommendation_split.json
-│       ├── train.json
-|       └── test.json
-└── README_DATASET.txt
+└── annotations/
+    ├── artifact_detection_split.json
+    │   ├── metadata.json
+    │   ├── train.json
+    │   └── test.json
+    └── parameter_recommendation_split.json
+        ├── metadata.json
+        ├── train.json
+        └── test.json
 ```
 
 ### Citation Requirements
-All publications, presentations, or software using PtychoBench must cite:
+If you use the PtychoBench in your research, publications, presentations, or software, please cite:
 
 ```bibtex
 @inproceedings{umeike2025ptychobench,
@@ -67,7 +68,7 @@ The dataset may be updated with:
 - Bug fixes in metadata
 - New experimental conditions
 
-**Current Version**: 1.0.0 (Released: 2025)
+**Current Version**: 1.0.0 (Released: December 2025)
 
 Check for updates:
 ```bash

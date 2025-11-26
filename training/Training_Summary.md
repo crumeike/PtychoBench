@@ -116,15 +116,6 @@ python inference/vlm_inference.py \
     --output_dir ./results
 ```
 
-
-## Notes
-
-1. **Dependencies:** Training requires `unsloth`, `transformers`, `trl`, `torch`, `datasets`
-2. **Data Access:** Request dataset access before training (see Data Access.md)
-3. **Compute:** Training is expensive - consider using pre-trained checkpoints
-4. **Reproducibility:** Set `--seed` for reproducible results
-5. **Logging:** Use `--report_to wandb` for experiment tracking
-
 ## Quick Test
 
 Test training scripts on a small subset:
@@ -147,3 +138,11 @@ python training/train_llm.py \
     --num_epochs 1 \
     --eval_samples 2
 ```
+
+## Notes
+
+1. **Dependencies:** Training requires `unsloth`, `transformers`, `trl`, `torch`, `datasets`
+2. **Data Access:** Request dataset access before training (see Data Access.md)
+3. **Compute:** Training is expensive - consider using pre-trained checkpoints
+4. **Reproducibility:** Set `--seed` for reproducible results
+5. **Logging:** Use `--report_to wandb` for experiment tracking

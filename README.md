@@ -26,6 +26,11 @@ This repository contains the **PtychoBench** benchmark code for evaluating Visio
 │   ├── llm_inference.py          # LLM parameter recommendation
 │   └── baseline_gpt4o.py         # OpenAI GPT-4o baseline (both tasks)
 │
+├── training/
+│   ├── train_vlm.py              # VLM training script
+│   ├── train_llm.py              # LLM training script
+│   └── data_loader.py            # Data loading utilities
+│
 ├── evaluation/
 │   ├── bootstrap.py              # Bootstrap analysis for single file
 │   ├── batch_bootstrap.py        # Batch bootstrap analysis
@@ -202,8 +207,64 @@ results/
 └── llm_param_rec_llm_70b_sft_20250115_150133_summary.csv
 ```
 
+## 🏋️ Training Your Own Models
 
-## Statistical Validation
+### VLM Training (Artifact Detection)
+
+```bash
+python training/train_vlm.py \
+    --data_dir ./data/splits \
+    --image_base_path ./data/images \
+    --model_name Llama-3.2-90B-Vision-Instruct \
+    --output_dir ./my_models/vlm_90b \
+    --num_epochs 50 \
+    --learning_rate 2e-4 \
+    --lora_r 16 \
+    --batch_size 1 \
+    --gradient_accumulation_steps 8
+```
+
+### LLM Training (Parameter Recommendation)
+
+```bash
+python training/train_llm.py \
+    --data_dir ./data/splits \
+    --model_name Meta-Llama-3.1-70B-Instruct \
+    --output_dir ./my_models/llm_70b \
+    --num_epochs 50 \
+    --learning_rate 2e-4 \
+    --lora_r 16 \
+    --batch_size 4 \
+    --gradient_accumulation_steps 8
+```
+
+### Training Arguments
+
+**Common Arguments:**
+- `--data_dir`: Directory with train.json, val.json, test.json
+- `--model_name`: Base model from Unsloth
+- `--output_dir`: Where to save checkpoints
+- `--num_epochs`: Number of training epochs (default: 50)
+- `--learning_rate`: Learning rate (default: 2e-4)
+- `--lora_r`: LoRA rank (default: 16)
+- `--lora_alpha`: LoRA alpha (default: 16)
+- `--batch_size`: Per-device batch size
+- `--gradient_accumulation_steps`: Gradient accumulation
+- `--eval_steps`: Evaluation frequency (default: 25)
+- `--save_steps`: Checkpoint save frequency (default: 50)
+- `--report_to`: Logging destination (wandb, tensorboard, none)
+
+**VLM-Specific:**
+- `--image_base_path`: Directory containing images (required)
+- `--load_in_4bit`: Enable 4-bit quantization
+
+**Hardware Requirements:**
+- VLM 90B: 4-8 A100 GPUs (80GB)
+- VLM 11B: 2-4 A100 GPUs (40-80GB)
+- LLM 70B: 4-8 A100 GPUs (80GB)
+- LLM 8B: 2 A100 GPUs (40GB)
+
+### Statistical Validation
 
 Bootstrap confidence intervals and significance testing:
 

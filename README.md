@@ -4,6 +4,8 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![arXiv](https://img.shields.io/badge/arXiv-2511.02503-b31b1b.svg)](https://arxiv.org/abs/2511.02503)
 
+<img width="3744" height="1152" alt="Gemini_Generated_Image_hyl44hyl44hyl44h" src="https://github.com/user-attachments/assets/d8f8c27e-0577-4a3e-8d70-1d96e6f9f1a8" />
+
 ## 📋 Overview
 
 This repository contains the **PtychoBench** benchmark code for evaluating Vision-Language Models (VLMs) and Large Language Models (LLMs) on ptychographic image analysis tasks. We investigate two specialization strategies:

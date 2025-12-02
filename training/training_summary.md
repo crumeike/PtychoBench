@@ -142,7 +142,7 @@ python training/train_llm.py \
 ## Notes
 
 1. **Dependencies:** Training requires `unsloth`, `transformers`, `trl`, `torch`, `datasets`
-2. **Data Access:** Request dataset access before training (see [Data Access.md]([PtychoBench](https://github.com/crumeike/PtychoBench/Data%20Access.md))
+2. **Data Access:** Request dataset access before training (see [Data Access.md](https://github.com/crumeike/PtychoBench/Data%20Access.md))
 3. **Compute:** Training is expensive - consider using pre-trained checkpoints
 4. **Reproducibility:** Set `--seed` for reproducible results
 5. **Logging:** Use `--report_to wandb` for experiment tracking

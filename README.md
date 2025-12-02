@@ -1,4 +1,4 @@
-<img width="3744" height="1152" alt="ptychobench_image" src="https://github.com/user-attachments/assets/d8f8c27e-0577-4a3e-8d70-1d96e6f9f1a8" />
+<img width="3744" height="1152" alt="ptychobench_logo" src="https://github.com/user-attachments/assets/d8f8c27e-0577-4a3e-8d70-1d96e6f9f1a8" />
 
 # PtychoBench: Adapting Foundation Models for X-ray Ptychography
 

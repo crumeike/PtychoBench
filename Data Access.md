@@ -22,7 +22,7 @@ The PtychoBench dataset contains 391 expert-annotated ptychographic reconstructi
 
 ### File Structure (Once Downloaded)
 ```
-ptychobench_dataset/
+ptychobench-dataset/
 ├── images/
 │   ├── af707e7b-object_ph_Niter400.png
 │   └── ...

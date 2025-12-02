@@ -49,7 +49,7 @@ data/
       {
         "role": "user",
         "content": [
-          {"type": "text", "text": "Identify artifacts..."},
+          {"type": "text", "text": "What types of artifacts are visible..."},
           {"type": "image", "image_path": "image_001.png"}
         ]
       },

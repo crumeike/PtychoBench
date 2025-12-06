@@ -321,7 +321,7 @@ title={Adapting general-purpose foundation models for X-ray Ptychography in Low-
 author={Robinson Umeike and Neil Getty and Xiangyu Yin and Yi Jiang},
 booktitle={AI for Accelerated Materials Design - NeurIPS 2025 Workshop},
 year={2025},
-url={https://openreview.net/forum?id=zgLfoV5jjX}
+url={https://doi.org/10.48550/arXiv.2511.02503}
 }
 ```
 
